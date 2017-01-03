@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+<meta charset="ISO-8859-1">
+<script src="../js/angular.js" type="text/javascript"></script>
+<script src="../js/controller.js" type="text/javascript"></script>
+<title>Insert title here</title>
+</head>
+<body>
+
+<div>
+	Hello this is angular
+	{{45/9}}
+	<div ng-controller = "MainController">
+		This is inside the controller <br>
+		{{name}} is the wife of {{person.firstName}} {{person.lastName}} <br>
+		Do you want to see who is he ?????????? <br>
+		
+		<img ng-src= "{{person.image}}" alt="{{person.firstName}} {{person.lastName}}"/>
+		
+	</div>
+	
+	<div ng-controller = "DateController">
+		Date: {{date}}
+	</div>
+	
+</div>
+
+<div ng-controller = "httpController">
+print error if any 
+	{{error}}
+	Now, just get the response data through http call <br>
+	
+	{{user.name}}
+	<img ng-src = "{{user.avatar_url}} alt = ""/>
+	
+	
+	
+</div>
+
+</body>
+</html>
