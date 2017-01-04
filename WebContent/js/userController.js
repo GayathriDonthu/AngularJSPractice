@@ -9,7 +9,7 @@
  * var output = createWork(); console.log("printing output:"+output);
  */
 
-/*var MainController = function($scope) {
+var MainController = function($scope) {
 	$scope.name = "Gayathri";
 
 	var person = {
@@ -29,14 +29,39 @@ var DateController = function($scope) {
 	$scope.date = "03-01-2017";
 	console.log($scope.date);
 };
-*/
+
 (function() {
 	
 	var app = angular.module("githubViewer");
 	
-	var httpController = function($scope, $interval, $location) {
+	var httpController = function($scope, github, $interval, $log, $location, $anchorScroll) {
 
 		console.log("Inside httpController !!");
+		
+		var reposname = "Spring";
+		$scope.reposname = reposname;
+		console.log("reposname:"+reposname);
+		
+		var onRepos = function(data){
+			$scope.repos = data;
+			console.log("Reponame:"+$scope.repos);
+			$location.hash("RepoDetails");
+			$anchorScroll();
+		};
+		
+		var onUserComplete = function(data) {
+			$scope.user = data;
+			console.log("Name is :" + $scope.user.name);
+			console.log("Repo URL is:"+$scope.user.repos_url);
+			github.getRepos($scope.user)
+				.then(onRepos, onError);
+
+		};
+
+		var onError = function(reason) {
+			$scope.error = "Couldn't fetch data";
+
+		}
 		
 		var decrementCountdown = function(){
 			$scope.countdown -= 1;
@@ -55,14 +80,17 @@ var DateController = function($scope) {
 		$scope.search = function(username){
 			console.log("username :"+username);
 			$log.info("Searching for:"+ username);
+			github.getUser(username)
+				 .then(onUserComplete, onError);
 			if(countdownInterval){
 				$interval.cancel(countdownInterval);
 				$scope.countdown = null;
 			}
-			//
 		};
 		
 		$scope.username = "angular";
+		$scope.heading = "Github Viewer!";
+		$scope.repoSortOrder = "-stargazers_count";
 		$scope.countdown = 5;
 		startCountdown();
 		

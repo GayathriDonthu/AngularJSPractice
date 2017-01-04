@@ -2,7 +2,7 @@
 <head>User Details page
 </head>
 <body>
-	<div>
+	<div id= "UserDetails">
 		<h3>Name : {{user.name}}</h3>
 		<img ng-src="{{user.avatar_url}}" alt=" " /> Order By: <select
 			ng-model="repoSortOrder">
@@ -13,7 +13,7 @@
 
 	</div>
 
-	<table>
+	<table id = "RepoDetails">
 		<thead>
 			<th>Name</th>
 			<th>Stars</th>
