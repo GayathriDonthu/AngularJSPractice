@@ -34,19 +34,13 @@ var DateController = function($scope) {
 	
 	var app = angular.module("githubViewer");
 	
-	var httpController = function($scope, github, $interval, $log, $location, $anchorScroll) {
+	var userController = function($scope, github, $routeParams) {
 
-		console.log("Inside httpController !!");
-		
-		var reposname = "Spring";
-		$scope.reposname = reposname;
-		console.log("reposname:"+reposname);
+		console.log("Inside userController !!");
 		
 		var onRepos = function(data){
 			$scope.repos = data;
 			console.log("Reponame:"+$scope.repos);
-			$location.hash("RepoDetails");
-			$anchorScroll();
 		};
 		
 		var onUserComplete = function(data) {
@@ -63,39 +57,14 @@ var DateController = function($scope) {
 
 		}
 		
-		var decrementCountdown = function(){
-			$scope.countdown -= 1;
-			if($scope.countdown < 1){
-				$scope.search($scope.username);
-			}
-		};
-		
-		var countdownInterval = null;
-		var startCountdown = function(){
-			$log.info("CountdownInterval:"+countdownInterval);
-			countdownInterval = $interval(decrementCountdown, 1000, $scope.countdown);
-			$log.info("CountdownInterval:"+countdownInterval);
-		}
-		
-		$scope.search = function(username){
-			console.log("username :"+username);
-			$log.info("Searching for:"+ username);
-			github.getUser(username)
-				 .then(onUserComplete, onError);
-			if(countdownInterval){
-				$interval.cancel(countdownInterval);
-				$scope.countdown = null;
-			}
-		};
-		
-		$scope.username = "angular";
-		$scope.heading = "Github Viewer!";
+		$scope.username = $routeParams.username;
 		$scope.repoSortOrder = "-stargazers_count";
-		$scope.countdown = 5;
-		startCountdown();
+		
+		github.getUser($scope.username)
+		  .then(onUserComplete, onError);
 		
 	};
 	
-	app.controller("httpController", httpController);
+	app.controller("userController", userController);
 
 }());

@@ -4,6 +4,7 @@
 <body>
 	<div id= "UserDetails">
 		<h3>Name : {{user.name}}</h3>
+		{{ error }}
 		<img ng-src="{{user.avatar_url}}" alt=" " /> Order By: <select
 			ng-model="repoSortOrder">
 			<option value="+name">Name</option>
@@ -59,5 +60,7 @@
 			</tr>
 		</tbody>
 	</table>
+	
+	<a href = "#/main">Back to Search</a>
 </body>
 </html>

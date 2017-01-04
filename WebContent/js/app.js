@@ -11,7 +11,11 @@
 				templateUrl : "main.html",
 				controller : "httpController"
 			})
-			.otherWise({
+			.when("/user/:username",{
+				templateUrl : "userDetails.html",
+				controller : "userController"
+			})
+			.otherwise({
 				redirectTo : "/main"
 			});
 	});

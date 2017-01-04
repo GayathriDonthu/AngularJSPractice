@@ -47,19 +47,16 @@ var DateController = function($scope) {
 		
 		var countdownInterval = null;
 		var startCountdown = function(){
-			$log.info("CountdownInterval:"+countdownInterval);
 			countdownInterval = $interval(decrementCountdown, 1000, $scope.countdown);
-			$log.info("CountdownInterval:"+countdownInterval);
 		}
 		
 		$scope.search = function(username){
 			console.log("username :"+username);
-			$log.info("Searching for:"+ username);
 			if(countdownInterval){
 				$interval.cancel(countdownInterval);
 				$scope.countdown = null;
 			}
-			//
+			$location.path("/user/"+username);
 		};
 		
 		$scope.username = "angular";
