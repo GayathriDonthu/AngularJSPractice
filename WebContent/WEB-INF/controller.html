@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app = "githubViewer">
 <head>
 <meta charset="ISO-8859-1">
 <script src="../js/angular.js" type="text/javascript"></script>
@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<div>
+<!-- <div>
 	Hello this is angular
 	{{45/9}}
 	<div ng-controller = "MainController">
@@ -25,18 +25,25 @@
 	</div>
 	
 </div>
-
+ -->
 <div ng-controller = "httpController">
-print error if any 
-	{{error}}
-	Now, just get the response data through http call <br>
+
+
+	<h2> {{ heading }}</h2>
+	Error Message : {{error}} <br><br>
+		
+	<form name = "searchUser" ng-submit="search(username)">
+		<input type="search" required placeholder="username to find" ng-model = "username"/>
+		<input type = "submit" value = "search"/>
+	</form>
+	<br><br>
+	<div ng-include = "'userDetails.html'" ng-show = "user">
 	
-	{{user.name}}
-	<img ng-src = "{{user.avatar_url}} alt = ""/>
-	
-	
+	</div>
 	
 </div>
+	
+
 
 </body>
 </html>
