@@ -45,7 +45,7 @@ var DateController = function($scope) {
 		
 		var onUserComplete = function(data) {
 			$scope.user = data;
-			console.log("Name is :" + $scope.user.name);
+			console.log("Name is :" + $scope.user.login);
 			console.log("Repo URL is:"+$scope.user.repos_url);
 			github.getRepos($scope.user)
 				.then(onRepos, onError);

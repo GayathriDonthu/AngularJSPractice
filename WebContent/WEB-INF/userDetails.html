@@ -28,10 +28,14 @@
 				</td>
 			</tr>
 			<tr ng-repeat="repo in repos | orderBy : repoSortOrder">
-				<td>{{repo.name | uppercase}}</td>
+				
+				<td>
+					<a href = "#/repo/{{user.login}}/{{repo.name}}"> {{repo.name | uppercase}}</a>
+				</td>
 				<td>{{repo.stargazers_count | number:1}}</td>
 				<td>{{repo.language}}</td>
 				<td>{{repo.created_at | date:'short'}}</td>
+				
 			</tr>
 			<tr>
 				<td>
